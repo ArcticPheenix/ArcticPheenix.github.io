@@ -71,7 +71,7 @@
         var paddleRightEdgeX = paddleLeftEdgeX + PADDLE_WIDTH;
 
         if (ballY >= paddleTopEdgeY - BALL_RADIUS &&  // Below the top of the paddle
-            ballY <= paddleBottomEdgeY + BALL_RADIUS &&  // Above the bottom of the paddle
+            ballY <= paddleBottomEdgeY &&  // Above the bottom of the paddle
             ballX >= paddleLeftEdgeX - BALL_RADIUS &&  // Right of the left side of the paddle
             ballX <= paddleRightEdgeX + BALL_RADIUS) {  // Left of the right side of the paddle
               ballSpeedY *= -1;
