@@ -23,6 +23,11 @@
       }
 
       function updateAll() {
+        moveAll();
+        drawAll();
+      }
+
+      function moveAll() {
         ballX += ballSpeedX;
         ballY += ballSpeedY;
 
@@ -38,6 +43,9 @@
         if (ballY >= canvas.height - BALL_RADIUS) {
           ballSpeedY *= -1;
         }
+      }
+
+      function drawAll() {
         canvasContext.fillStyle = 'black';
         canvasContext.fillRect(0, 0, canvas.width, canvas.height);
 
