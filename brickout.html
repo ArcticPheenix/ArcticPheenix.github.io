@@ -13,11 +13,12 @@
       var ballSpeedX = 5;
       var ballSpeedY = 5;
 
+      const FRAMES_PER_SECOND = 30;
+      const BALL_RADIUS = 10;
+
       window.onload = function() {
         canvas = document.getElementById('gameCanvas');
         canvasContext = canvas.getContext('2d');
-
-        const FRAMES_PER_SECOND = 30;
         setInterval(updateAll, 1000/FRAMES_PER_SECOND);
       }
 
@@ -25,16 +26,16 @@
         ballX += ballSpeedX;
         ballY += ballSpeedY;
 
-        if (ballX < 0) {
+        if (ballX <= BALL_RADIUS) {
           ballSpeedX *= -1;
         }
-        if (ballX > canvas.width) {
+        if (ballX >= canvas.width - BALL_RADIUS) {
           ballSpeedX *= -1;
         }
-        if (ballY < 0) {
+        if (ballY <= BALL_RADIUS) {
           ballSpeedY *= -1;
         }
-        if (ballY > canvas.height) {
+        if (ballY >= canvas.height - BALL_RADIUS) {
           ballSpeedY *= -1;
         }
         canvasContext.fillStyle = 'black';
@@ -42,7 +43,7 @@
 
         canvasContext.fillStyle = 'white';
         canvasContext.beginPath();
-        canvasContext.arc(ballX, ballY, 10, 0, Math.PI * 2, true);
+        canvasContext.arc(ballX, ballY, BALL_RADIUS, 0, Math.PI * 2, true);
         canvasContext.fill();
       }
     </script>
