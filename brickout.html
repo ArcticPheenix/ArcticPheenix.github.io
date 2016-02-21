@@ -75,6 +75,12 @@
             ballX >= paddleLeftEdgeX - BALL_RADIUS &&  // Right of the left side of the paddle
             ballX <= paddleRightEdgeX + BALL_RADIUS) {  // Left of the right side of the paddle
               ballSpeedY *= -1;
+
+              /* Logic which dictates angle and speed of the ball,
+              based upon where it hits the paddle */
+              var centerOfPaddleX = paddleX + PADDLE_WIDTH/2;
+              var ballDistFromPaddleCenterX = ballX - centerOfPaddleX;
+              ballSpeedX = ballDistFromPaddleCenterX * 0.35;
             }
       }
 
