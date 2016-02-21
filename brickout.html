@@ -21,13 +21,31 @@
       const PADDLE_DIST_FROM_EDGE = 60;
       var paddleX = 400;
 
+      const BRICK_HEIGHT = 50;
+      const BRICK_WIDTH = 100;
+      const BRICK_COUNT = 8;
+      var brickGrid = new Array(BRICK_COUNT);
+
+      var mouseX;
+      var mouseY;
+
       function updateMousePos(evt) {
         var rect = canvas.getBoundingClientRect();
         var root = document.documentElement;
-        var mouseX = evt.clientX - rect.left - root.scrollLeft;
-        var mouseY = evt.clientY - rect.top - root.scrollTop;
+        mouseX = evt.clientX - rect.left - root.scrollLeft;
+        mouseY = evt.clientY - rect.top - root.scrollTop;
 
         paddleX = mouseX - PADDLE_WIDTH/2;
+      }
+
+      function brickReset() {
+        for (var i = 0; i < BRICK_COUNT; i++) {
+          if (Math.random() < 0.5) {
+            brickGrid[i] = true;
+          } else {
+            brickGrid[i] = false;
+          }
+        }
       }
 
       window.onload = function() {
@@ -35,6 +53,7 @@
         canvasContext = canvas.getContext('2d');
         setInterval(updateAll, 1000/FRAMES_PER_SECOND);
         canvas.addEventListener('mousemove', updateMousePos);
+        brickReset();
       }
 
       function updateAll() {
@@ -89,6 +108,17 @@
         colorCircle(ballX, ballY, BALL_RADIUS, 'white');
 
         colorRect(paddleX, canvas.height - PADDLE_DIST_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, 'white');
+        drawBricks();
+
+        colorText(mouseX + ", " + mouseY, mouseX, mouseY, 'yellow');
+      }
+
+      function drawBricks() {
+        for (var i = 0; i < BRICK_COUNT; i++) {
+          if (brickGrid[i]) {
+            colorRect(BRICK_WIDTH * i, 0, BRICK_WIDTH - 2, BRICK_HEIGHT, 'blue');
+          }
+        }
       }
 
       function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor) {
@@ -101,6 +131,11 @@
         canvasContext.beginPath();
         canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
         canvasContext.fill();
+      }
+
+      function colorText(showWords, textX, textY, fillColor) {
+        canvasContext.fillStyle = fillColor;
+        canvasContext.fillText(showWords, textX, textY);
       }
     </script>
   </body>
