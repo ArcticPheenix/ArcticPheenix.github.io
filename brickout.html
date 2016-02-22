@@ -23,10 +23,10 @@
 
       const BRICK_HEIGHT = 50;
       const BRICK_WIDTH = 100;
-      const BRICK_COUNT = 8;
+      const BRICK_COLUMNS = 8;
       const BRICK_GAP = 2;
       const BRICK_ROWS = 4;
-      var brickGrid = new Array(BRICK_COUNT);
+      var brickGrid = new Array(BRICK_COLUMNS);
 
       var mouseX;
       var mouseY;
@@ -41,7 +41,7 @@
       }
 
       function brickReset() {
-        for (var i = 0; i < BRICK_COUNT; i++) {
+        for (var i = 0; i < BRICK_COLUMNS; i++) {
           if (Math.random() < 0.5) {
             brickGrid[i] = true;
           } else {
@@ -119,7 +119,7 @@
 
       function drawBricks() {
         for (var eachRow = 0; eachRow < BRICK_ROWS; eachRow++) {
-          for (var i = 0; i < BRICK_COUNT; i++) {
+          for (var i = 0; i < BRICK_COLUMNS; i++) {
             if (brickGrid[i]) {
               colorRect(BRICK_WIDTH * i,
                         BRICK_HEIGHT * eachRow,
